@@ -8,6 +8,8 @@
  * https://sailsjs.com/anatomy/config/routes-js
  */
 
+const SesionController = require("../api/controllers/SesionController");
+
 module.exports.routes = {
 
   /***************************************************************************
@@ -19,16 +21,21 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': { 
-    view: 'pages/inicio' 
-  },
+  'GET /': 'PrincipalController.inicio',
 
   '/acerca-de': {
     view: 'pages/acerca_de'
   },
   'GET /registro': 'SesionController.registro',
+
   'POST /procesar-registro': 'SesionController.procesarRegistro',
-  'GET /inicio=sesion': 'SesionController.inicioSesion',
+
+  'GET /inicio-sesion': 'SesionController.inicioSesion',
+
+  'GET /cerrar-sesion': 'SesionController.cerrarSesion',
+  
+  'POST /procesar-inicio-sesion' : 'SesionController.procesarInicioSesion',
+
 
   /***************************************************************************
   *                                                                          *

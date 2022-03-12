@@ -5,6 +5,8 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
+const CarroCompra = require("../models/CarroCompra");
+
 module.exports = {
   registro: async (req,res) => {
       res.view('pages/registro')
@@ -23,6 +25,7 @@ module.exports = {
         contrasena: req.body.contrasena
       })
       req.session.cliente = cliente;
+      req.addFlash('mensaje', 'Cliente registrado')
       return res.redirect('/');
     }
   
@@ -30,7 +33,28 @@ module.exports = {
 
   inicioSesion: async (req,res) => {
     res.view('pages/inicio_sesion')
-  }
+  },
+
+  procesarInicioSesion: async (req,res) => {
+    let cliente = await Cliente.findOne({email: req.body.email, contrasena: req.body.contrasena});
+    if (cliente){
+      req.session.cliente = cliente
+      let carroCompra = await CarroCompra.find({cliente: cliente.id})
+      req.session.carroCompra = carroCompra
+      req.addFlash('mensaje', 'Sesion iniciada')
+      return res.redirect('/');
+    }
+    else {
+      req.addFlash('mensaje', 'Email o contrasena invalidos')
+      return res.redirect('/inicio-sesion')
+    }
+  },
+
+  cerrarSesion: async (req, res) => {
+    req.session.cliente = undefined;
+    req.addFlash('mensaje', 'Sesión finalizada')
+    return res.redirect("/");
+  },
 
   
 };
