@@ -5,7 +5,6 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
-const CarroCompra = require("../models/CarroCompra");
 
 module.exports = {
   registro: async (req,res) => {
@@ -39,7 +38,7 @@ module.exports = {
     let cliente = await Cliente.findOne({email: req.body.email, contrasena: req.body.contrasena});
     if (cliente){
       req.session.cliente = cliente
-      let carroCompra = await CarroCompra.find({cliente: cliente.id})
+      let carroCompra = await CarroCompra.find({cliente: cliente.id});
       req.session.carroCompra = carroCompra
       req.addFlash('mensaje', 'Sesion iniciada')
       return res.redirect('/');
