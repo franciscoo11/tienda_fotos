@@ -34,7 +34,7 @@ module.exports = {
             return res.redirect('/admin/inicio-sesion')
         }
         let fotos = await Foto.find().sort('id')
-        res.view('pages/admin/principal', {fotos})
+        res.view('pages/admin/principal', { fotos })
     },
 
     cerrarSesion: async (req,res) => {
@@ -89,9 +89,7 @@ module.exports = {
             return res.redirect("/admin/inicio-sesion")
         }
         let clientes = await Cliente.find({})
-        res.view('pages/admin/clientes', {
-            clientes
-        })
+        res.view('pages/admin/clientes', { clientes })
     },
 
     misOrdenes: async(req, res) => {
@@ -100,7 +98,6 @@ module.exports = {
             return res.redirect("/admin/inicio-sesion")
         }
         let clienteId = req.params.clienteId;
-        //let ordenId = peticion.params.ordenId;
         let ordenes = await Orden.find({
             cliente: clienteId
         }).sort('id desc')
@@ -135,9 +132,7 @@ module.exports = {
         orden.detalles = await OrdenDetalle.find({
             orden: orden.id
         }).populate('foto')
-        return res.view('pages/admin/orden', {
-            orden
-        })
+        return res.view('pages/admin/orden', { orden })
     },
 
     desactivarCliente: async(req, res) => {
@@ -168,13 +163,10 @@ module.exports = {
         }
         let administradores = await Admin.find({})
 
-        res.view('pages/admin/administradores', {
-            administradores
-        })
+        res.view('pages/admin/administradores', { administradores })
     },
 
     desactivarAdmin: async(req, res) => {
-        //console.log('Admin disabled', peticion.params.adminId)
         if (req.session.admin.id == req.params.adminId) {
             req.addFlash('mensaje', 'No puedes desactivarte a ti mismo!')
         } else {
@@ -204,25 +196,22 @@ module.exports = {
             return res.redirect("/admin/inicio-sesion")
         }
         let consulta = `
-          select 'clientes'
+          SELECT 'clientes'
           as tipo, count( * ) total from cliente
           union
-          select 'Fotos', count( * ) from foto
+          SELECT 'Fotos', count( * ) from foto
           union
-          select 'Administradores', count( * ) from admin
+          SELECT 'Administradores', count( * ) from admin
           union
-          select 'Ordenes', count( * ) from orden
+          SELECT 'Ordenes', count( * ) from orden
         `
         await Cliente.getDatastore().sendNativeQuery(consulta, [], (errores, resultado) => {
             if (errores) return res.serverError(errores);
             let total = resultado.rows
 
-            res.view("pages/admin/dashboard", {
-                total
-            })
+            res.view("pages/admin/dashboard", { total })
         })
     }
-
 
 };
 
