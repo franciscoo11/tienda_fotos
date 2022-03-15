@@ -35,18 +35,24 @@ module.exports = {
   },
 
   procesarInicioSesion: async (req,res) => {
-    let cliente = await Cliente.findOne({email: req.body.email, contrasena: req.body.contrasena});
-    if (cliente.activo){
-      req.session.cliente = cliente
-      let carroCompra = await CarroCompra.find({cliente: cliente.id});
-      req.session.carroCompra = carroCompra
-      req.addFlash('mensaje', 'Sesion iniciada')
-      return res.redirect('/');
-    }
-    else {
-      req.addFlash('mensaje', 'Email o contrasena invalidos')
-      return res.redirect('/inicio-sesion')
-    }
+    let cliente = await Cliente.findOne({ email: req.body.email, contrasena: req.body.contrasena });
+      if (cliente) {
+        if (cliente.activo) {
+          req.session.cliente = cliente
+          let carroCompra = await CarroCompra.find({ cliente: cliente.id })
+          req.session.carroCompra = carroCompra
+          req.addFlash('mensaje', 'Sesión iniciada')
+          return res.redirect("/")
+        } 
+        else {
+          req.addFlash('mensaje', 'Cliente desactivado')
+          return res.redirect("/inicio-sesion");
+        }
+      } 
+      else {
+        req.addFlash('mensaje', 'Email o contraseña invalidos')
+        return res.redirect("/inicio-sesion");
+      }
   },
 
   cerrarSesion: async (req, res) => {

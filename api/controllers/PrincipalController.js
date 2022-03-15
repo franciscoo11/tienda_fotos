@@ -8,8 +8,8 @@
 module.exports = {
     
     inicio: async (req,res) => {
-        let fotos = await Foto.find({activa: true})
-        res.view('pages/inicio', {fotos})
+      let fotos = await Foto.find({activa: true}).sort('id')
+      res.view('pages/inicio', { fotos })
     },
 
     topVendidas: async (req, res) => {
