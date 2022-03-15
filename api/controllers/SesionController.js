@@ -36,7 +36,7 @@ module.exports = {
 
   procesarInicioSesion: async (req,res) => {
     let cliente = await Cliente.findOne({email: req.body.email, contrasena: req.body.contrasena});
-    if (cliente){
+    if (cliente.activo){
       req.session.cliente = cliente
       let carroCompra = await CarroCompra.find({cliente: cliente.id});
       req.session.carroCompra = carroCompra

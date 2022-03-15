@@ -72,6 +72,24 @@ module.exports.routes = {
 
   'GET /admin/activar-foto/:fotoId': 'AdminController.activarFoto',
 
+  'GET /admin/clientes': 'AdminController.mostrarClientes',
+
+  'GET /admin/mis-ordenes/:clienteId': 'AdminController.misOrdenes',
+
+  'GET /admin/orden/:ordenId': 'AdminController.ordenDeCompra',
+
+  'GET /admin/desactivar-cliente/:clienteId': 'AdminController.desactivarCliente',
+
+  'GET /admin/activar-cliente/:clienteId': 'AdminController.activarCliente',
+
+  'GET /admin/administradores': 'AdminController.mostrarAdministradores',
+
+  'GET /admin/desactivar-admin/:adminId': 'AdminController.desactivarAdmin',
+
+  'GET /admin/activar-admin/:adminId': 'AdminController.activarAdmin',
+
+  'GET /admin/dashboard': 'AdminController.dashboard',
+
   
   /***************************************************************************
   *                                                                          *

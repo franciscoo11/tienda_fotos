@@ -19,6 +19,8 @@ module.exports = {
 
     contrasena: { type: 'string'},
 
+    activo: { type: 'boolean' }
+
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
