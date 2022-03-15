@@ -12,5 +12,29 @@ module.exports = {
         res.view('pages/inicio', {fotos})
     },
 
-};
+    topVendidas: async (req, res) => {
 
+      let consulta = `
+      SELECT
+        titulo,
+        contenido,
+        COUNT ( * ) AS cantidad
+      FROM
+        orden_detalle
+        INNER JOIN foto ON orden_detalle.foto_id = foto.ID
+      GROUP BY
+        titulo, contenido, foto_id
+      ORDER BY
+      COUNT ( * ) DESC
+      LIMIT 10
+      `
+  
+      await OrdenDetalle.query(consulta, [], (errores, resultado) => {
+        let fotos = resultado.rows
+        res.view('pages/top_vendidas', { fotos })
+      })
+    },
+
+    
+};
+  
