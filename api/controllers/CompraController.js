@@ -87,6 +87,41 @@ module.exports = {
       orden.detalles = await OrdenDetalle.find({ orden: orden.id }).populate('foto')
       return res.view('pages/orden', { orden })
     },
+
+    agregarListaDeseo: async (req, res) => {
+      let foto = await ListaDeseo.findOne({ foto: req.params.fotoId, cliente: req.session.cliente.id })
+      if (foto) {
+        req.addFlash('mensaje', 'La foto ya había sido agregada a la lista de deseo')
+      }
+      else {
+        await ListaDeseo.create({
+          cliente: req.session.cliente.id,
+          foto: req.params.fotoId
+        })
+        req.addFlash('mensaje', 'Foto agregada a la lista de deseo')
+      }
+      return res.redirect("/")
+    },
+  
+    listaDeseo: async (req, res) => {
+      if (!req.session || !req.session.cliente) {
+        return res.redirect("/")
+      }
+      let elementos = await ListaDeseo.find({ cliente: req.session.cliente.id }).populate('foto')
+      res.view('pages/lista_deseo', { elementos })
+    },
+  
+    eliminarListaDeseo: async (req, res) => {
+      let foto = await ListaDeseo.findOne({ foto: req.params.fotoId, cliente: req.session.cliente.id })
+      if (foto) {
+        await ListaDeseo.destroy({
+          cliente: req.session.cliente.id,
+          foto: req.params.fotoId
+        })
+        req.addFlash('mensaje', 'Foto eliminada de la lista de deseo')
+      }
+      return res.redirect("/lista-deseo")
+    },
     
 };
 

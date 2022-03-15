@@ -49,6 +49,29 @@ module.exports.routes = {
   'GET /mis-ordenes/:ordenId': 'CompraController.ordenDeCompra',
 
   'GET /top-vendidas': 'PrincipalController.topVendidas',
+
+  'GET /agregar-lista-deseo/:fotoId': 'CompraController.agregarListaDeseo',
+
+  'GET /lista-deseo': 'CompraController.listaDeseo',
+
+  'GET /eliminar-lista-deseo/:fotoId': 'CompraController.eliminarListaDeseo',
+
+  'GET /admin/inicio-sesion': 'AdminController.inicioSesion',
+
+  'POST /admin/procesar-inicio-sesion': 'AdminController.procesarInicioSesion',
+
+  'GET /admin/principal': 'AdminController.principal',
+
+  'GET /admin/cerrar-sesion': 'AdminController.cerrarSesion',
+
+  'GET /admin/agregar-foto': 'AdminController.agregarFoto',
+  
+  'POST /admin/procesar-agregar-foto' : 'AdminController.procesarAgregarFoto',
+
+  'GET /admin/desactivar-foto/:fotoId': 'AdminController.desactivarFoto',
+
+  'GET /admin/activar-foto/:fotoId': 'AdminController.activarFoto',
+
   
   /***************************************************************************
   *                                                                          *
