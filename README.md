@@ -43,5 +43,5 @@ Para ello completa los siguentes requerimientos relacionados a dicho subsistema:
     Una vez que haces clic en la orden verás las fotos
     Activar o desactivar un cliente, donde un usuario desactivado no puede iniciar sesión.
 
-    Administradores: al cliquear este elemento aparecen todos los administradores del sitio. Desde esta página puedes activar o desactivar un administrador (un           administrador no se puede desactivar a sí mismo).
-    Dashboard: al cliquear este elemento se despliega la cantidad total de clientes, la cantidad total de fotos, la cantidad total de administradores y la cantidad       total de órdenes.
+    Administradores: al cliquear este elemento aparecen todos los administradores del sitio. Desde esta página puedes activar o desactivar un administrador (un administrador no se puede desactivar a sí mismo).
+    Dashboard: al cliquear este elemento se despliega la cantidad total de clientes, la cantidad total de fotos, la cantidad total de administradores y la cantidad total de órdenes.
