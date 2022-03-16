@@ -26,9 +26,7 @@ Note:  Generators are usually run using the globally-installed `sails` CLI (comm
 
 ### EXPECTATIVAS DE ENTREGA PROYECTO FINAL
 
-Te damos la bienvenida a la última parte de nuestra navegación por Sails! Reconocemos que has realizado un excelente trabajo y a continuación tienes la oportunidad para demostrate a ti mismo qué tanto conoces sobre este framework.
-
-El sitio de Fotos está a punto de ser lanzado. Tu misión es ampliar el subsistema administrativo para porporcionar una mayor cantidad de funcionalidades. Crearemos un menú más completo para los administradores que incluye los siguientes enlaces: 
+Tu misión es ampliar el subsistema administrativo para porporcionar una mayor cantidad de funcionalidades. Crearemos un menú más completo para los administradores que incluye los siguientes enlaces: 
 
     -Principal (Enlaza a lá página ya existente “/admin/principal”)
     -Clientes
