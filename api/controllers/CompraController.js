@@ -8,7 +8,7 @@
 module.exports = {
   
     agregarCarroCompra: async (req,res) => {
-      let foto = await CarroCompra.findOne({foto : req.params.fotoId, cliente: req.session.cliente.id})
+      let foto = await CarroCompra.findOne({ foto : req.params.fotoId, cliente: req.session.cliente.id })
       if (foto) {
         req.addFlash('mensaje', 'La foto ya se había agregado en el carro.')
       }
@@ -17,8 +17,8 @@ module.exports = {
           cliente: req.session.cliente.id,
           foto: req.params.fotoId
         })
-        req.session.CarroCompra = await CarroCompra.find({ cliente: req.session.cliente.id })
-        req.addFlash('mensaje', 'La foto agregadada en el carro de compra.')
+        req.session.carroCompra = await CarroCompra.find({ cliente: req.session.cliente.id })
+        req.addFlash('mensaje', 'La foto ha sido agregadada en el carro de compra.')
       }
       return res.redirect('/')
     },
@@ -38,7 +38,7 @@ module.exports = {
           cliente: req.session.cliente.id,
           foto: req.params.fotoId
         })
-        req.session.CarroCompra = await CarroCompra.find({ cliente: req.session.cliente.id })
+        req.session.carroCompra = await CarroCompra.find({ cliente: req.session.cliente.id })
         req.addFlash('mensaje', 'Foto eliminada del carro de compra.')
       }
       return res.redirect('/carro-de-compra')
@@ -56,7 +56,7 @@ module.exports = {
           foto: req.session.carroCompra[i].foto
         })
       }
-      await CarroCompra.destroy({cliente: req.session.cliente.id})
+      await CarroCompra.destroy({ cliente: req.session.cliente.id })
       req.session.carroCompra = []
       req.addFlash('mensaje', 'La compra ha sido realizada')
       return res.redirect("/")
@@ -67,7 +67,7 @@ module.exports = {
         return res.redirect('/')
       }
       let ordenes = await Orden.find({cliente : req.session.cliente.id }).sort('id desc')
-      res.view('pages/mis_ordenes', {ordenes})
+      res.view('pages/mis_ordenes', { ordenes })
     },
 
     ordenDeCompra: async (req, res) => {

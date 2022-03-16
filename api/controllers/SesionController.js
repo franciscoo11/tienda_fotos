@@ -21,7 +21,8 @@ module.exports = {
       let cliente = await Cliente.create({
         email: req.body.email,
         nombre: req.body.nombre,
-        contrasena: req.body.contrasena
+        contrasena: req.body.contrasena,
+        activo: true
       })
       req.session.cliente = cliente;
       req.addFlash('mensaje', 'Cliente registrado')
@@ -36,7 +37,7 @@ module.exports = {
 
   procesarInicioSesion: async (req,res) => {
     let cliente = await Cliente.findOne({ email: req.body.email, contrasena: req.body.contrasena });
-      if (cliente) {
+    if (cliente) {
         if (cliente.activo) {
           req.session.cliente = cliente
           let carroCompra = await CarroCompra.find({ cliente: cliente.id })
@@ -48,11 +49,11 @@ module.exports = {
           req.addFlash('mensaje', 'Cliente desactivado')
           return res.redirect("/inicio-sesion");
         }
-      } 
-      else {
-        req.addFlash('mensaje', 'Email o contraseña invalidos')
-        return res.redirect("/inicio-sesion");
-      }
+    } 
+    else {
+      req.addFlash('mensaje', 'Email o contraseña invalidos')
+      return res.redirect("/inicio-sesion");
+    }
   },
 
   cerrarSesion: async (req, res) => {

@@ -8,7 +8,7 @@
 module.exports = {
     
     inicio: async (req,res) => {
-      let fotos = await Foto.find({activa: true}).sort('id')
+      let fotos = await Foto.find({activa: true})
       res.view('pages/inicio', { fotos })
     },
 
@@ -28,12 +28,16 @@ module.exports = {
       COUNT ( * ) DESC
       LIMIT 10
       `
-  
-      await OrdenDetalle.query(consulta, [], (errores, resultado) => {
+
+      await OrdenDetalle.getDatastore().sendNativeQuery(consulta, [], (errores, resultado) => {
+        if (errores) {
+          return res.serverError(errores);
+        }
         let fotos = resultado.rows
         res.view('pages/top_vendidas', { fotos })
       })
-    },
+    }
+    
 
 };
   

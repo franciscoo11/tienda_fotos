@@ -72,13 +72,13 @@ module.exports = {
     },
 
     desactivarFoto: async (req, res) => {
-        await Foto.update({id: req.params.fotoId}, {activa: false})
+        await Foto.update({ id: req.params.fotoId }, {activa: false})
         req.addFlash('mensaje', 'Foto desactivada')
         return res.redirect("/admin/principal")
     },
     
     activarFoto: async (req, res) => {
-        await Foto.update({id: req.params.fotoId}, {activa: true})
+        await Foto.update({ id: req.params.fotoId }, {activa: true})
         req.addFlash('mensaje', 'Foto activada')
         return res.redirect("/admin/principal")
     },
@@ -98,12 +98,8 @@ module.exports = {
             return res.redirect("/admin/inicio-sesion")
         }
         let clienteId = req.params.clienteId;
-        let ordenes = await Orden.find({
-            cliente: clienteId
-        }).sort('id desc')
-        res.view('pages/admin/mis_ordenes', {
-            ordenes
-        })
+        let ordenes = await Orden.find({ cliente: clienteId }).sort('id desc')
+        res.view('pages/admin/mis_ordenes', { ordenes })
     },
 
     ordenDeCompra: async(req, res) => {
@@ -111,47 +107,31 @@ module.exports = {
             req.addFlash('mensaje', 'Sesión inválida')
             return res.redirect("/admin/inicio-sesion")
         }
-
         let ordenId = req.params.ordenId;
 
-        let orden = await Orden.findOne({
-            //cliente: peticion.session.cliente.id,
-            id: ordenId
-        }).populate('detalles')
+        let orden = await Orden.findOne({ id: ordenId }).populate('detalles')
 
         if (!orden) {
             return res.redirect("pages/admin/clientes")
         }
 
         if (orden && orden.detalles == 0) {
-            return res.view('pages/admin/clientes', {
-                orden
-            })
+            return res.view('pages/admin/clientes', { orden })
         }
 
-        orden.detalles = await OrdenDetalle.find({
-            orden: orden.id
-        }).populate('foto')
+        orden.detalles = await OrdenDetalle.find({ orden: orden.id }).populate('foto')
         return res.view('pages/admin/orden', { orden })
     },
 
     desactivarCliente: async(req, res) => {
-        await Cliente.update({
-            id: req.params.clienteId
-        }, {
-            activo: false
-        })
+        await Cliente.update({ id: req.params.clienteId }, { activo: false })
 
         req.addFlash('mensaje', 'Cliente desactivado')
         return res.redirect("/admin/clientes")
     },
 
     activarCliente: async(req, res) => {
-        await Cliente.update({
-            id: req.params.clienteId
-        }, {
-            activo: true
-        })
+        await Cliente.update({ id: req.params.clienteId }, { activo: true })
         req.addFlash('mensaje', 'Cliente activado')
         return res.redirect("/admin/clientes")
     },
@@ -169,23 +149,16 @@ module.exports = {
     desactivarAdmin: async(req, res) => {
         if (req.session.admin.id == req.params.adminId) {
             req.addFlash('mensaje', 'No puedes desactivarte a ti mismo!')
-        } else {
-            await Admin.update({
-                id: req.params.adminId
-            }, {
-                activo: false
-            })
+        } 
+        else {
+            await Admin.update({ id: req.params.adminId }, {activo: false })
             req.addFlash('mensaje', 'Administrador desactivado')
         }
         return res.redirect("/admin/administradores")
     },
 
     activarAdmin: async(req, res) => {
-        await Admin.update({
-            id: req.params.adminId
-        }, {
-            activo: true
-        })
+        await Admin.update({ id: req.params.adminId }, {activo: true })
         req.addFlash('mensaje', 'Administrador activado')
         return res.redirect("/admin/administradores")
     },
@@ -196,7 +169,7 @@ module.exports = {
             return res.redirect("/admin/inicio-sesion")
         }
         let consulta = `
-          SELECT 'clientes'
+          SELECT 'Clientes'
           as tipo, count( * ) total from cliente
           union
           SELECT 'Fotos', count( * ) from foto
@@ -206,9 +179,10 @@ module.exports = {
           SELECT 'Ordenes', count( * ) from orden
         `
         await Cliente.getDatastore().sendNativeQuery(consulta, [], (errores, resultado) => {
-            if (errores) return res.serverError(errores);
+            if (errores) {
+                return res.serverError(errores);
+            }
             let total = resultado.rows
-
             res.view("pages/admin/dashboard", { total })
         })
     }
