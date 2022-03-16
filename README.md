@@ -30,18 +30,18 @@ Te damos la bienvenida a la última parte de nuestra navegación por Sails! Reco
 
 El sitio de Fotos está a punto de ser lanzado. Tu misión es ampliar el subsistema administrativo para porporcionar una mayor cantidad de funcionalidades. Crearemos un menú más completo para los administradores que incluye los siguientes enlaces: 
 
-    Principal (Enlaza a lá página ya existente “/admin/principal”)
-    Clientes
-    Administradores
-    Dashboard
+    -Principal (Enlaza a lá página ya existente “/admin/principal”)
+    -Clientes
+    -Administradores
+    -Dashboard
 
 Para ello completa los siguentes requerimientos relacionados a dicho subsistema:
 
     Clientes: al cliquear este elemento se despliega la lista de todos los clientes del sitio. Desde esta página puedes ejecutar las acciones a continuación:
 
-        Al hacer clic sobre un cliente verás las órdenes del cliente
-            Una vez que haces clic en la orden verás las fotos
-        Activar o desactivar un cliente, donde un usuario desactivado no puede iniciar sesión.
+    Al hacer clic sobre un cliente verás las órdenes del cliente
+    Una vez que haces clic en la orden verás las fotos
+    Activar o desactivar un cliente, donde un usuario desactivado no puede iniciar sesión.
 
-    Administradores: al cliquear este elemento aparecen todos los administradores del sitio. Desde esta página puedes activar o desactivar un administrador (un administrador no se puede desactivar a sí mismo).
-    Dashboard: al cliquear este elemento se despliega la cantidad total de clientes, la cantidad total de fotos, la cantidad total de administradores y la cantidad total de órdenes.
+    Administradores: al cliquear este elemento aparecen todos los administradores del sitio. Desde esta página puedes activar o desactivar un administrador (un           administrador no se puede desactivar a sí mismo).
+    Dashboard: al cliquear este elemento se despliega la cantidad total de clientes, la cantidad total de fotos, la cantidad total de administradores y la cantidad       total de órdenes.
