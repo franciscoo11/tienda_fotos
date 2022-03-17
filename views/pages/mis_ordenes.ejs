@@ -21,7 +21,7 @@
         <% ordenes.forEach( orden => { %>
         <tr>
           <td scope="row"><a href="/mis-ordenes/<%=orden.id%>"><%=orden.id%></a></td>
-          <td scope="row"><%=orden.fecha.getDate()%>/<%=orden.fecha.getMonth()%><%=orden.fecha.getFullYear()%></td>
+          <td scope="row"><%=orden.fecha.getDate()%>/<%=orden.fecha.getMonth()%>/<%=orden.fecha.getFullYear()%></td>
           <td scope="row"><%=orden.total%></td>
         </tr>
         <% }) %>
