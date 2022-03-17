@@ -88,7 +88,7 @@ module.exports = {
             req.addFlash('mensaje', 'Sesión inválida')
             return res.redirect("/admin/inicio-sesion")
         }
-        let clientes = await Cliente.find({})
+        let clientes = await Cliente.find({}).sort('id')
         res.view('pages/admin/clientes', { clientes })
     },
 
