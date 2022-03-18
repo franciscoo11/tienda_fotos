@@ -17,10 +17,16 @@ module.exports = {
     procesarInicioSesion: async (req,res) => {
         let admin = await Admin.findOne({ email: req.body.email, contrasena: req.body.contrasena })
         if (admin) {
-            req.session.admin = admin
-            req.session.cliente = undefined
-            req.addFlash('mensaje', 'Sesion de admin iniciada')
-            return res.redirect('/admin/principal')
+            if (admin.activo) {
+                req.session.admin = admin
+                req.session.cliente = undefined
+                req.addFlash('mensaje', 'Sesion de admin iniciada')
+                return res.redirect('/admin/principal')
+            }
+            else {
+                req.addFlash('mensaje', 'Admin desactivado')
+                return res.redirect("/admin/inicio-sesion");
+            }
         }
         else {
             req.addFlash('mensaje', 'Email o contraseña invalidas.')
